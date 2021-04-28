@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="model"
+            type="com.rajkumar.shadidotcom.repository.database.Profile" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            setImageUrl="@{model.photo}"
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_launcher_background" />
+
+        <Button
+            android:id="@+id/btn_accept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/green"
+            android:text="@string/accept"
+            android:textColor="@color/white"
+            android:visibility='@{model.interest.equals("NA") ? View.VISIBLE : View.INVISIBLE}'
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btn_decline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@color/red"
+            android:text="@string/decline"
+            android:visibility='@{model.interest.equals("NA") ? View.VISIBLE : View.INVISIBLE}'
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_accept"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background='@{model.interest.equals("Y") ? @color/green : @color/red}'
+            android:text='@{model.interest.equals("Y") ? "Accepted" : "Declined"}'
+            android:textColor="@color/white"
+            android:visibility='@{model.interest.equals("NA") ? View.INVISIBLE : View.VISIBLE}'
+            app:layout_constraintBottom_toBottomOf="@id/btn_accept"
+            app:layout_constraintEnd_toEndOf="@id/btn_decline"
+            app:layout_constraintStart_toStartOf="@+id/btn_accept"
+            app:layout_constraintTop_toTopOf="@id/btn_accept" />
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_marginBottom="8dp"
+            android:text="@{model.name}"
+            tools:text="Rajkumar N"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@id/txtAge"
+            app:layout_constraintBottom_toTopOf="@+id/txtAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/txtAge"
+            android:layout_marginBottom="8dp"
+            android:text='@{model.age +" Years"}'
+            tools:text="26 years"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@id/txt_city"
+            app:layout_constraintBottom_toTopOf="@+id/txt_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/txt_city"
+            android:layout_width="wrap_content"
+            android:text='@{(model.city + ", "+ model.state)}'
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            tools:text="Mumbai"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintStart_toStartOf="@id/btn_accept"
+            app:layout_constraintBottom_toTopOf="@+id/btn_accept"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
